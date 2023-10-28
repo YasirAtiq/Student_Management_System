@@ -46,7 +46,7 @@ class AgeCalculator(QWidget):
         year = self.dob_line_label.text()[6:10]
         try:
             if not len(year) <= 3:
-                yob = int(self.dob_line_label.text()[6:10])
+                yob = int(year)
                 age = str(current - yob)
                 self.output.setText(
                     f"{self.name_line_label.text()} is {age} years old.")
