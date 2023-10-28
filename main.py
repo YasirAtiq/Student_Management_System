@@ -2,8 +2,8 @@ from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import (QApplication, QLayout, QWidget, QGridLayout,
                              QLabel, QLineEdit, QPushButton, QMainWindow,
                              QTableWidget, QTableWidgetItem, QDialog,
-                             QVBoxLayout, QComboBox)
-from PyQt6.QtGui import QAction
+                             QVBoxLayout, QComboBox, QToolBar)
+from PyQt6.QtGui import QAction, QIcon
 import sqlite3
 import sys
 
@@ -20,6 +20,7 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("Student Management System")
+        self.setMinimumSize(800, 600)
 
         file_menu_item = self.menuBar().addMenu("&File")
         help_menu_item = self.menuBar().addMenu("&Help")
@@ -44,6 +45,19 @@ class MainWindow(QMainWindow):
                                               "Phone no."))
         self.table.verticalHeader().setVisible(False)
         self.setCentralWidget(self.table)
+
+        toolbar = QToolBar()
+        toolbar.setMovable(True)
+        self.addToolBar(toolbar)
+        add_student_toolbar_action = toolbar.addAction(
+            QIcon("icons//add.png"), "Register Student")
+        add_student_toolbar_action.triggered.connect(
+            add_student_action.trigger)
+
+        add_student_toolbar_action = toolbar.addAction(
+            QIcon("icons//search.png"), "Search Student")
+        add_student_toolbar_action.triggered.connect(
+            search_student_action.trigger)
 
     def load_data(self):
         connection = sqlite3.connect("database.db")
