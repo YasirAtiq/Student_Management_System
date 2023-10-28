@@ -33,12 +33,13 @@ class MainWindow(QMainWindow):
 
         search_student_action = QAction("Find Student", self)
         search_student_action.triggered.connect(self.search)
+        add_student_action.setMenuRole(QAction.MenuRole.NoRole)
         edit_menu_item.addAction(search_student_action)
 
         about_action = QAction("About", self)
         help_menu_item.addAction(about_action)
-        add_student_action.setMenuRole(QAction.MenuRole.NoRole)
         about_action.setMenuRole(QAction.MenuRole.NoRole)
+        about_action.triggered.connect(self.about)
 
         self.table = QTableWidget()
         self.table.setColumnCount(4)
@@ -91,6 +92,10 @@ class MainWindow(QMainWindow):
 
     def remove(self):
         dialog = RemoveRecord(self.table)
+        dialog.exec()
+
+    def about(self):
+        dialog = AboutPage()
         dialog.exec()
 
     def cell_clicked(self):
@@ -285,6 +290,17 @@ class RemoveRecord(QDialog):
         connection.close()
         main_window.load_data()
         self.reject()
+
+
+class AboutPage(QMessageBox):
+    def __init__(self):
+        super().__init__()
+        self.setWindowTitle("About Me")
+        content = """
+        Hello! My name is Yasir Atiq and I am Ardit Sulce's(the teachr) student.
+        I am currently doing his course "Python Mega Course: Learn Python in 60 Days, Build 20 Apps"
+        This is his app number 13. """
+        self.setText(content)
 
 
 app = QApplication(sys.argv)
