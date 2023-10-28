@@ -28,6 +28,7 @@ to the main.spec file at the end.
 - pefile==2023.2.7 
 - pyinstaller==6.1.0 
 - pyinstaller-hooks-contrib==2023.10 
-- PyQt6==6.5.3 PyQt6-Qt6==6.5.3 
+- PyQt6==6.5.3 
+- PyQt6-Qt6==6.5.3 
 - PyQt6-sip==13.6.0 
 - pywin32-ctypes==0.2.2
